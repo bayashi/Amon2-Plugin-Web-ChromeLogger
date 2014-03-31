@@ -1,15 +1,27 @@
 package Amon2::Plugin::Web::ChromeLogger;
 use strict;
 use warnings;
-use Carp qw/croak/;
+use Web::ChromeLogger;
 
 our $VERSION = '0.01';
 
-sub new {
-    my $class = shift;
-    my $args  = shift || +{};
+sub init {
+    my ($class, $c, $conf) = @_;
 
-    bless $args, $class;
+    $c->add_trigger('BEFORE_DISPATCH' => sub {
+        $_[0]->{chrome_logger} = Web::ChromeLogger->new;
+    });
+
+    $c->add_trigger('AFTER_DISPATCH' => sub {
+        $_[1]->header('X-ChromeLogger-Data' => $_[0]->{chrome_logger}->finalize);
+    });
+
+    Amon2::Util::add_method(
+        $c => 'chrome',
+        sub {
+            $_[0]->{chrome_logger};
+        },
+    );
 }
 
 1;
@@ -18,17 +30,25 @@ __END__
 
 =head1 NAME
 
-Amon2::Plugin::Web::ChromeLogger - one line description
+Amon2::Plugin::Web::ChromeLogger - The Chrome Logger Plugin for Amon2
 
 
 =head1 SYNOPSIS
 
-    use Amon2::Plugin::Web::ChromeLogger;
+in your app
+
+    __PACKAGE__->load_plugins('Web::ChromeLogger');
+
+then in a controller
+
+    $c->chrome->info('aloha!');
 
 
 =head1 DESCRIPTION
 
-Amon2::Plugin::Web::ChromeLogger is
+Amon2::Plugin::Web::ChromeLogger is the Chrome Plugin for Amon2.
+
+See L<Web::ChromeLogger>, L<http://craig.is/writing/chrome-logger> for detail
 
 
 =head1 REPOSITORY
@@ -46,7 +66,7 @@ Dai Okabayashi E<lt>bayashi@cpan.orgE<gt>
 
 =head1 SEE ALSO
 
-L<Other::Module>
+L<Amon2>, L<Web::ChromeLogger>
 
 
 =head1 LICENSE
