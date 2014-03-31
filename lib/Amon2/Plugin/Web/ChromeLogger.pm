@@ -51,6 +51,13 @@ Amon2::Plugin::Web::ChromeLogger is the Chrome Plugin for Amon2.
 See L<Web::ChromeLogger>, L<http://craig.is/writing/chrome-logger> for detail
 
 
+=head1 METHODS
+
+=head2 init
+
+initialized this plugin
+
+
 =head1 REPOSITORY
 
 Amon2::Plugin::Web::ChromeLogger is hosted on github
