@@ -13,10 +13,13 @@ my $builder = Module::Build->new(
     },
     build_requires      => {
         'Test::More' => 0.88,
+        'Test::Requires' => 0,
+        'MIME::Base64' => 0,
+        'JSON::XS' => 0,
     },
     requires => {
         'perl' => '5.008001',
-        'Carp' => 0,
+        'Web::ChromeLogger' => 0.04,
     },
     add_to_cleanup      => [ 'Amon2-Plugin-Web-ChromeLogger-*' ],
     meta_merge     => {
