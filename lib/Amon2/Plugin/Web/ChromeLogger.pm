@@ -8,6 +8,8 @@ our $VERSION = '0.01';
 sub init {
     my ($class, $c, $conf) = @_;
 
+    return if $conf->{disabled};
+
     $c->add_trigger('BEFORE_DISPATCH' => sub {
         $_[0]->{chrome_logger} = Web::ChromeLogger->new;
     });
