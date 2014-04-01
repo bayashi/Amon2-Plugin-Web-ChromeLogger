@@ -17,7 +17,7 @@ use JSON::XS;
     sub dispatch {
         my $c = shift;
         if ($c->request->path_info =~ m!^/info$!) {
-            $c->chrome->info('aloha!');
+            $c->chrome_logger->info('aloha!');
             return $c->create_response(
                 200,
                 [],
@@ -25,7 +25,7 @@ use JSON::XS;
             );
         }
         elsif ($c->request->path_info =~ m!^/warn$!) {
-            $c->chrome->warn('mahalo!');
+            $c->chrome_logger->warn('mahalo!');
             return $c->create_response(
                 200,
                 [],
@@ -33,7 +33,7 @@ use JSON::XS;
             );
         }
         elsif ($c->request->path_info =~ m!^/console$!) {
-            $c->console('kai!');
+            $c->chrome('kai!');
             return $c->create_response(
                 200,
                 [],

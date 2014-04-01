@@ -17,14 +17,14 @@ sub init {
     });
 
     Amon2::Util::add_method(
-        $c => 'chrome',
+        $c => 'chrome_logger',
         sub {
             $_[0]->{chrome_logger};
         },
     );
 
     Amon2::Util::add_method(
-        $c => 'console',
+        $c => 'chrome',
         sub {
             $_[0]->{chrome_logger}->info($_[1]);
         },
@@ -48,11 +48,11 @@ in your app
 
 then in a controller
 
-    $c->console('aloha!');
+    $c->chrome('aloha!');
 
 or to access raw C<Web::ChromeLogger> instance.
 
-    $c->chrome->info('mahalo!');
+    $c->chrome_logger->warn('mahalo!');
 
 
 =head1 DESCRIPTION
@@ -63,18 +63,18 @@ See L<Web::ChromeLogger>, L<http://craig.is/writing/chrome-logger> for detail
 
 This plugin added below methods for context($c) in Amon2.
 
-=head2 console($log_message)
+=head2 chrome($log_message)
 
 To put info log to chrome console.
 
-    $c->console('mahalo!');
+    $c->chrome('mahalo!');
 
-=head2 chrome
+=head2 chrome_logger
 
 To get C<Web::ChromeLogger> instance.
 
-    $c->chrome->info('kai!');
-    $c->chrome->warn('nalu!');
+    $c->chrome_logger->info('kai!');
+    $c->chrome_logger->warn('nalu!');
 
 
 =head1 METHODS
