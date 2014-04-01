@@ -22,6 +22,13 @@ sub init {
             $_[0]->{chrome_logger};
         },
     );
+
+    Amon2::Util::add_method(
+        $c => 'console',
+        sub {
+            $_[0]->{chrome_logger}->info($_[1]);
+        },
+    );
 }
 
 1;

@@ -32,6 +32,14 @@ use JSON::XS;
                 ['mahalo'],
             );
         }
+        elsif ($c->request->path_info =~ m!^/console$!) {
+            $c->console('kai!');
+            return $c->create_response(
+                200,
+                [],
+                ['kai'],
+            );
+        }
         return $c->create_response(404, [], []);
     }
     __PACKAGE__->load_plugins('Web::ChromeLogger');
@@ -55,6 +63,15 @@ my $mech = Test::WWW::Mechanize::PSGI->new(app => MyApp::Web->to_app);
     my $json = MIME::Base64::decode_base64($chrome_log);
     my $dat = decode_json($json);
     is $dat->{rows}[0][0][0], 'mahalo!';
+}
+
+{
+    $mech->get_ok('/console');
+    $mech->content_contains('kai');
+    my $chrome_log = $mech->res->header('X-ChromeLogger-Data');
+    my $json = MIME::Base64::decode_base64($chrome_log);
+    my $dat = decode_json($json);
+    is $dat->{rows}[0][0][0], 'kai!';
 }
 
 done_testing;
