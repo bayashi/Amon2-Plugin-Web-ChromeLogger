@@ -10,6 +10,9 @@ sub init {
 
     return if $conf->{disabled};
 
+    return if $ENV{PLACK_ENV} && $ENV{PLACK_ENV} eq 'production'
+                    && !$conf->{enable_in_production};
+
     $c->add_trigger('BEFORE_DISPATCH' => sub {
         $_[0]->{chrome_logger} = Web::ChromeLogger->new;
     });
