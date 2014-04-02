@@ -15,6 +15,7 @@ my $builder = Module::Build->new(
         'Test::More' => 0.88,
         'Test::Requires' => 0,
         'MIME::Base64' => 0,
+        'JSON' => 0,
         'JSON::XS' => 0,
     },
     requires => {
