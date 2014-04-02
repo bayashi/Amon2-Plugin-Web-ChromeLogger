@@ -5,7 +5,7 @@ use Test::Requires 'Test::WWW::Mechanize::PSGI';
 use MIME::Base64;
 use JSON::XS;
 
-$ENV{PLACK_ENV} = 'production';
+local $ENV{PLACK_ENV} = 'production';
 
 {
     package MyApp;
