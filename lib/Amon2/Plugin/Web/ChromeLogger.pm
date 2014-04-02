@@ -14,7 +14,9 @@ sub init {
                     && !$conf->{enable_in_production};
 
     $c->add_trigger('BEFORE_DISPATCH' => sub {
-        $_[0]->{chrome_logger} = Web::ChromeLogger->new;
+        $_[0]->{chrome_logger} = Web::ChromeLogger->new(
+            json_encoder => $conf->{json_encoder},
+        );
     });
 
     $c->add_trigger('AFTER_DISPATCH' => sub {
