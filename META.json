@@ -39,7 +39,7 @@
    "provides" : {
       "Amon2::Plugin::Web::ChromeLogger" : {
          "file" : "lib/Amon2/Plugin/Web/ChromeLogger.pm",
-         "version" : "0.01"
+         "version" : "0.02"
       }
    },
    "release_status" : "stable",
@@ -54,5 +54,5 @@
          "url" : "http://github.com/bayashi/Amon2-Plugin-Web-ChromeLogger"
       }
    },
-   "version" : "0.01"
+   "version" : "0.02"
 }
