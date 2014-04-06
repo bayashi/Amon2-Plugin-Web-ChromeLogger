@@ -3,7 +3,7 @@ use strict;
 use warnings;
 use Web::ChromeLogger;
 
-our $VERSION = '0.02';
+our $VERSION = '0.03';
 
 sub init {
     my ($class, $c, $conf) = @_;
